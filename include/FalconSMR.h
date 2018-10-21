@@ -1,3 +1,12 @@
+/*
+ * FalconSMR.h
+ *
+ *  Created on: Dec 1, 2015
+ *
+ * Copyright: (c) 2011 by Wolfgang Engelhard
+ * License: GNU GPL v2 (see License.txt)
+ */
+
 #ifndef FALCON_SMR_H
 #define FALCON_SMR_H
 

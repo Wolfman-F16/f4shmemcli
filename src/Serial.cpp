@@ -1,3 +1,12 @@
+/*
+ * serial.cpp
+ *
+ *  Created on: Dec 1, 2015
+ *
+ * Copyright: (c) 2011 by Wolfgang Engelhard
+ * License: GNU GPL v2 (see License.txt)
+ */
+
 #include "Serial.h"
 
 /**
@@ -60,7 +69,7 @@ BOOL CSerial::modeSet(int nBaud, int nBits, int nStopp, int nParity)
   dcb.BaudRate = nBaud;
   // neue Parameter in die Struktur kopieren (Bits: z.B. 7 oder 8)
   dcb.ByteSize = (BYTE)nBits;
-  // neue Parameter in die Struktur kopieren (Parität:(siehe MSDN))
+  // neue Parameter in die Struktur kopieren (Paritï¿½t:(siehe MSDN))
   dcb.Parity   = (BYTE)nParity;
   // Anzahl Stoppbits (siehe MSDN)
   dcb.StopBits = (BYTE)nStopp;

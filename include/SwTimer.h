@@ -2,7 +2,9 @@
  * SwTimer.h
  *
  *  Created on: Dec 1, 2015
- *      Author: wolfgang
+ *
+ * Copyright: (c) 2011 by Wolfgang Engelhard
+ * License: GNU GPL v2 (see License.txt)
  */
 
 #ifndef INCLUDE_SWTIMER_H_

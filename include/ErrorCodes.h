@@ -1,6 +1,14 @@
 /*
-definition of error codes used as return value
-*/
+ * ErrorCodes.h
+ *
+ * definition of error codes used as return value
+ *
+ *  Created on: Dec 1, 2015
+ *
+ * Copyright: (c) 2011 by Wolfgang Engelhard
+ * License: GNU GPL v2 (see License.txt)
+ */
+
 #ifndef ERROR_OK
 #define ERROR_OK                  0
 #endif

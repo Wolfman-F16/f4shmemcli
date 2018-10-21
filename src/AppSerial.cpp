@@ -2,8 +2,11 @@
  * AppSerial.cpp
  *
  *  Created on: 28.11.2015
- *      Author: Engelhard
+ *
+ * Copyright: (c) 2011 by Wolfgang Engelhard
+ * License: GNU GPL v2 (see License.txt)
  */
+
 #include <AppSerial.h>
 
 CAppSerial::CAppSerial() {

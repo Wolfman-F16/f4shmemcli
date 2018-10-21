@@ -1,11 +1,9 @@
-// -----------------------------------------------------------------------------------
-// (c) 2003 www.winapi.net
-//
-// Serial.h
-//
-// Headerdatei für eine einfache, aber leistungsfähige
-// Kommunikation über die Serielle Schnittstelle
-// -----------------------------------------------------------------------------------
+/*
+ * serial.h
+ *
+ *  (c) 2003 www.winapi.net
+ *
+ */
 
 #ifndef FALCON_SERIAL_H
 #define FALCON_SERIAL_H

@@ -1,3 +1,11 @@
+/*
+ * FalconSMR.cpp
+ *
+ *  Created on: Dec 1, 2015
+ *
+ * Copyright: (c) 2011 by Wolfgang Engelhard
+ * License: GNU GPL v2 (see License.txt)
+ */
 // FalconSMR.cpp : This is one of three files comprising class FalconSMR
 // the others are FalconSMRGetter.cpp and FalconSMRGetterGUI.cpp
 /*

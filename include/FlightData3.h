@@ -1,3 +1,9 @@
+/*
+ * FlightData3.h
+ *
+ * Copyright: (c) Tommo
+ */
+
 #ifndef _FLIGHT_DATA_H
 #define _FLIGHT_DATA_H
 
