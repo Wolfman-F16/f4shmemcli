@@ -1,3 +1,12 @@
+/*
+ * log.cpp
+ *
+ *  Created on: Dec 1, 2015
+ *
+ * Copyright: (c) 2011 by Wolfgang Engelhard
+ * License: GNU GPL v2 (see License.txt)
+ */
+
 #pragma warning(disable: 4786) // to disable map compile warnings
 
 #include "log.h"

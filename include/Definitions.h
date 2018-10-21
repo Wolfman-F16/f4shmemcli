@@ -1,3 +1,12 @@
+/*
+ * Definitions.h
+ *
+ *  Created on: Dec 1, 2015
+ *
+ * Copyright: (c) 2011 by Wolfgang Engelhard
+ * License: GNU GPL v2 (see License.txt)
+ */
+
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 

@@ -1,3 +1,12 @@
+/*
+ * Log.h
+ *
+ *  Created on: Dec 1, 2015
+ *
+ * Copyright: (c) 2011 by Wolfgang Engelhard
+ * License: GNU GPL v2 (see License.txt)
+ */
+
 #ifndef LOG_H
 #define LOG_H
 
