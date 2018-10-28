@@ -22,22 +22,25 @@ unsigned int Falcon4::TIMEOUT_VALUE = 20; // init refresh rate [ms]
  */
 int sendData() {
   int errorCode = ERROR_OK;
+  int bytesSent;
   bool bShowRealtime = false;
   static int cClockToggle = 1; // init toggle value
+  static int dbgCtr = 0;
   unsigned int iLength = 0;
 
   if (cClockToggle < 0) {
     bShowRealtime = true;
   }
-  errorCode = m_pAppFalcon.prepareData(m_pAppFalcon.m_pFalconSMR->cData, &iLength, bShowRealtime);
+  errorCode = m_pAppFalcon.prepareData(&(m_pAppFalcon.m_pFalconSMR->cData[0]), &iLength, bShowRealtime);
   if (errorCode != ERROR_OK) {
     return errorCode;
   }
-  errorCode = m_pAppSerial.sendData(m_pAppFalcon.m_pFalconSMR->cData, iLength);
-  if (errorCode != ERROR_OK) {
-    return errorCode;
-  }
-printf("%d\t0x%x\r",iLength,m_pAppFalcon.m_pFalconSMR->cData);
+  bytesSent = m_pAppSerial.sendData(&(m_pAppFalcon.m_pFalconSMR->cData[0]), iLength);
+
+printf("%d\t%d\t0x%x 0x%x 0x%x 0x%x\t%d\r",iLength, bytesSent, m_pAppFalcon.m_pFalconSMR->cData[0], 
+m_pAppFalcon.m_pFalconSMR->cData[1],
+m_pAppFalcon.m_pFalconSMR->cData[2],
+m_pAppFalcon.m_pFalconSMR->cData[3], dbgCtr++);
   cClockToggle *= -1;
 
   return ERROR_OK;

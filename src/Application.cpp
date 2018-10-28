@@ -74,7 +74,7 @@ int CApplication::prepareData(unsigned char* cData, unsigned int* length,
 
   m_pFalconSMR->cData[iIndex++] = SOF1;
 
-  m_pFalconSMR->cData[iIndex++] = *(m_pFalconSMR->getMasterCautionAsChar());
+  m_pFalconSMR->cData[iIndex++] = (m_pFalconSMR->getMasterCautionOn()) + 0x30;
 
   m_pFalconSMR->cData[iIndex++] = 0x00;
 
