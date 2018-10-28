@@ -36,11 +36,16 @@ int sendData() {
     return errorCode;
   }
   bytesSent = m_pAppSerial.sendData(&(m_pAppFalcon.m_pFalconSMR->cData[0]), iLength);
-
+  if(bytesSent < 0) {
+    printf("\rError in serial comm: %d\r\n", GetLastError());
+  } else {
+  // Debug information
 printf("%d\t%d\t0x%x 0x%x 0x%x 0x%x\t%d\r",iLength, bytesSent, m_pAppFalcon.m_pFalconSMR->cData[0], 
 m_pAppFalcon.m_pFalconSMR->cData[1],
 m_pAppFalcon.m_pFalconSMR->cData[2],
 m_pAppFalcon.m_pFalconSMR->cData[3], dbgCtr++);
+  }
+  m_pAppSerial.flush();
   cClockToggle *= -1;
 
   return ERROR_OK;

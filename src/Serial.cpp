@@ -299,11 +299,13 @@ writes a byte array
 int CSerial::sendData(const unsigned char *sBuffer, int iBytesToWrite)
 {
   DWORD dwBytesWritten = 0;
+  
   if (hComm != INVALID_HANDLE_VALUE) // COM-Port open?
   {
     // write specified number of bytes to COM-Port
-    WriteFile(hComm, sBuffer, iBytesToWrite, &dwBytesWritten, NULL);
-  }
+    if(!WriteFile(hComm, sBuffer, iBytesToWrite, &dwBytesWritten, NULL)){
+	 return -1;
+  }}
 
   return (int)dwBytesWritten; // return number of transmitted bytes
 }
@@ -335,3 +337,15 @@ int CSerial::readData(char *sBuffer)
   return i;
 }
 
+/**
+* flushes RX buffer.
+*/
+int CSerial::flushRx()
+{
+  if(hComm != INVALID_HANDLE_VALUE) // COM-Port open?
+  {
+  	PurgeComm(hComm, PURGE_RXABORT | PURGE_RXCLEAR);
+	return 0;
+  }  
+  return -1;
+}

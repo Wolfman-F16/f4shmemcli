@@ -62,3 +62,12 @@ int CAppSerial::sendData(const unsigned char* cData, unsigned int iLength) {
   }
   return iRetVal;
 }
+
+
+int CAppSerial::flush() {
+  int iRetVal = -1;
+  if(m_pSerialComm) {
+    iRetVal = m_pSerialComm->flushRx();
+  }
+  return iRetVal;
+}

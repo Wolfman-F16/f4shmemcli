@@ -35,7 +35,7 @@ public:
   int readData (char*);
   int sendData (const unsigned char*, int);  // write string
   BOOL writeSingleByte (unsigned char);  // write single character
-
+  int flushRx ();
 
 private:
   // -----------------------------------------------------------

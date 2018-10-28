@@ -21,6 +21,7 @@ public:
 
   int setup();
   int sendData(const unsigned char*, unsigned int);
+  int flush();
 
 private:
   CSerial *m_pSerialComm;
