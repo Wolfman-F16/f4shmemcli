@@ -7,14 +7,14 @@
  * License: GNU GPL v2 (see License.txt)
  */
 
-#include <AppSerial.h>
+#include "AppSerial.h"
 
 CAppSerial::CAppSerial() {
-  devUhfRadio = NULL;
+  m_pSerialComm = NULL;
 }
 
 CAppSerial::~CAppSerial() {
-  usb_close(devUhfRadio);
+  delete m_pSerialComm;
 }
 
 int CAppSerial::setup() {
@@ -24,29 +24,41 @@ int CAppSerial::setup() {
   Log::getInstance()->setFilter(DEBUG_LEVEL);
   Log::getInstance()->setLogger("falcon4.log.txt");
 
-  devUhfRadio = openUsbDevice(VENDOR_ID, PRODUCT_ID, PRODUCT_NAME);;
+  // load config file
+  CConfigData *pConfig = new CConfigData;
 
+  // init communications
+  m_pSerialComm = new CSerial;
+  bResult = m_pSerialComm->open(pConfig->getComPort(), pConfig->getBaudRate(),
+      pConfig->getBits(), pConfig->getStopBit(), pConfig->getParity());
 
-  if (!devUhfRadio) {
-    Log::getInstance()->error("Failed to open USB device\n");
+  // calculate new refresh value, based on baud rate
+  TIMEOUT_VALUE = (((FRAME_LENGTH + RWR_SIZE) * 9000) / pConfig->getBaudRate())
+      + 2;
+  //                bits incl. stop bit and in ms                        2ms extra
+  // release resources
+  delete pConfig;
+
+  if (!bResult) {
+    Log::getInstance()->error("Failed to open COM port\n");
     return FALSE;
   } else {
-    printf("Established connection to UHF-Radio\n");
+    printf("serial connection established with %d ms\n", TIMEOUT_VALUE);
   }
 
+  if(m_pSerialComm->writeSingleByte('\0') != TRUE){
+    return FALSE;
+  }
+
+  sprintf(charBuffer, "%c%c%cNo connection.", SOF1, SOF2, ID_PFL);
+  m_pSerialComm->sendData((unsigned char*) charBuffer, 18);
   return TRUE;
 }
 
-int CAppSerial::sendData(const uint32_t freq, uint32_t chan) {
+int CAppSerial::sendData(const unsigned char* cData, unsigned int iLength) {
   int iRetVal = -1;
-  uint16_t value[2];
-
-  if(devUhfRadio) {
-    if(convert(value, freq, chan)) {
-      Log::getInstance()->error("converting input data failed\n");
-    } else {
-      sendData(devUhfRadio,USB_DATA_TX, value);
-    }
+  if(m_pSerialComm) {
+    iRetVal = m_pSerialComm->sendData(cData, iLength);
   }
   return iRetVal;
 }

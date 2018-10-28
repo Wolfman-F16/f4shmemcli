@@ -11,8 +11,8 @@
 #define APPSERIAL_H_
 
 #include "Application.h"
-#include "uhfRadio.h"
-#include "usb.h"
+#include "Serial.h"
+#include "ConfigData.h"
 
 class CAppSerial {
 public:
@@ -20,11 +20,10 @@ public:
   virtual ~CAppSerial();
 
   int setup();
-  int sendData(uin32_t , uint32_t );
+  int sendData(const unsigned char*, unsigned int);
 
 private:
-  usb_dev_handle *devUhfRadio = 0;
-
+  CSerial *m_pSerialComm;
 };
 
 
