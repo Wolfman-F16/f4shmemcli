@@ -6,6 +6,7 @@
  * Copyright: (c) 2011 by Wolfgang Engelhard
  * License: GNU GPL v2 (see License.txt)
  */
+
 #include "Application.h"
 
 // ############################################################################

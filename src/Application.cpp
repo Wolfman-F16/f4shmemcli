@@ -73,45 +73,13 @@ int CApplication::prepareData(unsigned char* cData, unsigned int* length,
   }
 
   m_pFalconSMR->cData[iIndex++] = SOF1;
-  m_pFalconSMR->cData[iIndex++] = SOF2;
 
-  if (m_pFalconSMR->getPowerOff()) {
-    bPowerOff = TRUE;
-  }
-  iErrorCode = prepareRightConsole(m_pFalconSMR, iIndex, bShowRealtime,
-      bPowerOff);
-  if (iErrorCode != ERROR_OK) {
-    errorIndex = SRC_RIGHT_CONSOLE;
-    return iErrorCode;
-  }
-  iErrorCode = prepareCenterConsole(m_pFalconSMR, iIndex, bPowerOff);
-  if (iErrorCode != ERROR_OK) {
-    errorIndex = SRC_CENTER_CONSOLE;
-    return iErrorCode;
-  }
-  iErrorCode = prepareLeftConsole(m_pFalconSMR, iIndex, bPowerOff);
-  if (iErrorCode != ERROR_OK) {
-    errorIndex = SRC_LEFT_CONSOLE;
-    return iErrorCode;
-  }
+  m_pFalconSMR->cData[iIndex++] = m_pFalconSMR->getMasterCautionAsChar();
 
   m_pFalconSMR->cData[iIndex++] = 0x00;
 
   // update communications
-#if DEBUG > 0
-  if (bSingleShotFlag)
-  {
-    iErrorCode = m_pFalconSMR->dumpData(iIndex);
-    if (iErrorCode)
-    {
-      Beep(840, 1000);
-    }
-    bSingleShotFlag = false;
-  }
-#endif
-
   *length = iIndex;
-  //cData = m_pFalconSMR->cData;
 
   return iErrorCode;
 }
