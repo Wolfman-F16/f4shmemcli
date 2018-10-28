@@ -23,8 +23,10 @@ bool CSwTimer::checkTimeout(uint8_t idx) {
 
 void CSwTimer::updateTime() {
   uint8_t i;
+  SYSTEMTIME time;
   static uint32_t oldTime = 0;
-  uint32_t newTime = timeGetTime();
+  GetSystemTime(&time);
+  uint32_t newTime = time.wSecond * 1000 + time.wMilliseconds;
   uint32_t delta = newTime - oldTime;
 
   for(i = 0; i < 32; i++) {
