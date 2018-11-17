@@ -17,34 +17,21 @@
 
 
 /**
-creates a file mapping
+opens a file mapping
 \return handle to file mapping (aka shared memory)
 */
 HANDLE FalconSMR::createBms(void)
 {
   SetLastError(0); /* clear last error */
-  hFlightDataBms = CreateFileMapping(INVALID_HANDLE_VALUE,
-                                  NULL,
-                                  PAGE_READWRITE,
-                                  0,
-                                  sizeof(FlightDataBMS),
+  hFlightDataBms = OpenFileMapping(PAGE_READONLY,
+                                  FALSE,
                                   BMS_MAP_NAME);
 
   if (GetLastError() != ERROR_SUCCESS) {
-    Log::getInstance()->debug("New BMS shared memory mapping not created...\n");
-    if (GetLastError() == ERROR_ALREADY_EXISTS) {
-      Log::getInstance()->debug("Falcon 4 BMS is running\n");
-      return hFlightDataBms;
-    } else {
-	  CloseHandle(hFlightData);
-      hFlightData = NULL;
-      cData = new unsigned char[200];
-      sprintf((char*)cData, "Error code: %d\n", GetLastError() );
-      Log::getInstance()->error((char*)cData);
-      delete cData;
-      cData = NULL;
-    }
+    Log::getInstance()->debug("BMS shared memory mapping failed...\n");
     return NULL;
+  } else {
+    Log::getInstance()->debug("Falcon BMS shared memory opened\n");
   }
   
   return hFlightDataBms;
